@@ -1,0 +1,173 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mypackage"
+version = "0.1.0"
+description = "A Python library template."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+    { name = "EY" },
+]
+keywords = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+# Runtime dependencies are intentionally empty at scaffold time.
+# Add libraries here as your project grows (e.g. numpy, pandas).
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/ey-org/mypackage"
+
+# ----------------------------------------------------------------------------
+# Build backend: hatchling
+# ----------------------------------------------------------------------------
+[tool.hatch.build.targets.wheel]
+packages = ["src/mypackage"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/mypackage",
+    "tests",
+    "README.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "pyproject.toml",
+]
+
+# ----------------------------------------------------------------------------
+# uv dependency groups (installed via `uv sync --group <name>`)
+# ----------------------------------------------------------------------------
+[dependency-groups]
+dev = [
+    "bandit>=1.8.0",
+    "coverage[toml]>=7.14.0",
+    "mypy>=2.1.0",
+    "pre-commit>=4.0.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.6.0",
+]
+
+# ----------------------------------------------------------------------------
+# Ruff — sole linter + formatter (replaces black, flake8, isort)
+# ----------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+src = ["src", "tests"]
+extend-exclude = [
+    ".venv",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+]
+ignore = [
+    "E203",   # whitespace before ':' (formatter handles)
+    "E501",   # line too long (line-length enforces)
+]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # re-exports
+"tests/**/*.py" = ["ARG", "SIM"]  # pytest fixtures + asserts
+
+[tool.ruff.lint.mccabe]
+max-complexity = 18
+
+[tool.ruff.lint.isort]
+known-first-party = ["mypackage"]
+lines-after-imports = 2
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+# ----------------------------------------------------------------------------
+# pytest
+# Note: NO `pythonpath` key. The editable install (via `uv sync`) puts
+# `mypackage` on sys.path. No sys.path hacks anywhere.
+# ----------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+    "--cov=mypackage",
+    "--cov-report=term-missing",
+]
+
+# ----------------------------------------------------------------------------
+# Coverage — reported but never gated
+# ----------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["mypackage"]
+branch = true
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# ----------------------------------------------------------------------------
+# mypy — light type checking, run on demand and in CI (not on every commit)
+# ----------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+files = ["src/mypackage"]
+ignore_missing_imports = true
+strict = false
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+
+# ----------------------------------------------------------------------------
+# Bandit — security linting
+# ----------------------------------------------------------------------------
+[tool.bandit]
+targets = ["src/mypackage"]

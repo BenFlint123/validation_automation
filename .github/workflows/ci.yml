@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python-version: "3.11"
+          - os: ubuntu-latest
+            python-version: "3.12"
+          - os: windows-latest
+            python-version: "3.12"
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        # Pinned to commit SHA (CodeQL: actions/unpinned-tag). Dependabot
+        # will bump the SHA + comment when a new release ships. See
+        # .github/instructions/workflows.instructions.md.
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.9.26"
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Sync dependencies
+        run: uv sync --all-groups --python ${{ matrix.python-version }}
+
+      # Lint / type-check / security scan are independent of the matrix axes,
+      # so gate them to run once on the Linux / 3.12 entry. See
+      # .github/instructions/workflows.instructions.md.
+      - name: Ruff format check
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: uv run ruff format --check .
+
+      - name: Ruff lint
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: uv run ruff check .
+
+      - name: Pytest
+        run: uv run pytest
+
+      - name: Mypy
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: uv run mypy
+
+      - name: Bandit
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: uv run bandit -r src/mypackage
