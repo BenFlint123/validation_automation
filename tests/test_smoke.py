@@ -12,18 +12,18 @@ import sys
 
 
 def test_package_imports():
-    import mypackage  # noqa: F401
+    import validation_automation  # noqa: F401
 
 
 def test_package_has_version():
-    import mypackage
+    import validation_automation
 
-    assert isinstance(mypackage.__version__, str)
-    assert mypackage.__version__  # non-empty
+    assert isinstance(validation_automation.__version__, str)
+    assert validation_automation.__version__  # non-empty
 
 
 def test_src_is_not_on_sys_modules():
     """`src/` must not be importable as a package — it is just the layout root."""
-    import mypackage  # noqa: F401  (force import)
+    import validation_automation  # noqa: F401  (force import)
 
     assert "src" not in sys.modules

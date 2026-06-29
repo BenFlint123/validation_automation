@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mypackage"
+name = "validation_automation"
 version = "0.1.0"
 description = "A Python library template."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
 authors = [
-    { name = "EY" },
+    { name = "Ben Flint" },
 ]
 keywords = []
 classifiers = [
@@ -27,17 +27,17 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/ey-org/mypackage"
+Repository = "https://github.com/BenFlint123/validation_automation"
 
 # ----------------------------------------------------------------------------
 # Build backend: hatchling
 # ----------------------------------------------------------------------------
 [tool.hatch.build.targets.wheel]
-packages = ["src/mypackage"]
+packages = ["src/validation_automation"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "src/mypackage",
+    "src/validation_automation",
     "tests",
     "README.md",
     "LICENSE",
@@ -83,6 +83,7 @@ select = [
     "UP",     # pyupgrade
     "ARG",    # flake8-unused-arguments
     "SIM",    # flake8-simplify
+    "D1",     # missing docstrings on public functions
 ]
 ignore = [
     "E203",   # whitespace before ':' (formatter handles)
@@ -93,13 +94,13 @@ unfixable = []
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # re-exports
-"tests/**/*.py" = ["ARG", "SIM"]  # pytest fixtures + asserts
+"tests/**/*.py" = ["ARG", "SIM", "D1"]  # pytest fixtures + asserts
 
 [tool.ruff.lint.mccabe]
-max-complexity = 18
+max-complexity = 10
 
 [tool.ruff.lint.isort]
-known-first-party = ["mypackage"]
+known-first-party = ["validation_automation"]
 lines-after-imports = 2
 
 [tool.ruff.format]
@@ -108,10 +109,13 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
 
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
 # ----------------------------------------------------------------------------
 # pytest
 # Note: NO `pythonpath` key. The editable install (via `uv sync`) puts
-# `mypackage` on sys.path. No sys.path hacks anywhere.
+# `validation_automation` on sys.path. No sys.path hacks anywhere.
 # ----------------------------------------------------------------------------
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -122,15 +126,16 @@ addopts = [
     "--strict-markers",
     "--strict-config",
     "--import-mode=importlib",
-    "--cov=mypackage",
+    "--cov=validation_automation",
     "--cov-report=term-missing",
+    "--cov-report=html",
 ]
 
 # ----------------------------------------------------------------------------
 # Coverage — reported but never gated
 # ----------------------------------------------------------------------------
 [tool.coverage.run]
-source = ["mypackage"]
+source = ["validation_automation"]
 branch = true
 
 [tool.coverage.report]
@@ -155,7 +160,7 @@ directory = "htmlcov"
 # ----------------------------------------------------------------------------
 [tool.mypy]
 python_version = "3.11"
-files = ["src/mypackage"]
+files = ["src/validation_automation"]
 ignore_missing_imports = true
 strict = false
 disallow_untyped_defs = false
@@ -170,4 +175,4 @@ warn_unused_configs = true
 # Bandit — security linting
 # ----------------------------------------------------------------------------
 [tool.bandit]
-targets = ["src/mypackage"]
+targets = ["src/validation_automation"]

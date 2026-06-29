@@ -11,4 +11,4 @@ release; breaking changes will still be called out under **Changed** /
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/ey-org/mypackage/commits/master
+[Unreleased]: https://github.com/BenFlint123/validation_automation/commits/main

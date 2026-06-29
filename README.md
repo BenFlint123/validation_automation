@@ -35,10 +35,10 @@ template", or `git clone`) do the following before adding your own code:
    (`[project.urls] Repository`) and in
    `.github/ISSUE_TEMPLATE/config.yml`.
 4. **Review `LICENSE`** — currently BSD 3-Clause with `Copyright (c) 2026,
-   EY`. Update the year and copyright holder if needed, or replace the
+   Ben Flint`. Update the year and copyright holder if needed, or replace the
    licence file entirely.
-5. **Review `.github/CODEOWNERS`** — currently lists EY default owners.
-   Replace with your team's GitHub IDs.
+5. **Review `.github/CODEOWNERS`** —
+   Replace with your team's GitHub usernames.
 6. **Reset `CHANGELOG.md`** entries as you cut releases (the template
    ships with an empty `## [Unreleased]` section).
 7. Run `uv sync` to generate a fresh `uv.lock` (the template ships
@@ -48,7 +48,6 @@ A quick verification that the rename is complete:
 
 ```powershell
 git grep -i "mypackage"          # should match only the new name
-git grep -i "eyvaltestlib"        # should return nothing
 ```
 
 ---

@@ -7,8 +7,8 @@ applyTo: '.github/workflows/**'
 ## Pinning
 
 - **First-party GitHub actions** (`actions/*`, `github/*`): pin to a major
-  tag (`actions/checkout@v4`). These are lower supply-chain risk and the
-  tag is treated as a moving "latest minor/patch within v4" pointer.
+  tag. These are lower supply-chain risk and the
+  tag is treated as a moving "latest minor/patch within current version" pointer.
 - **Third-party actions**: pin to an **immutable commit SHA** with the
   human-readable version in a trailing comment, e.g.
 

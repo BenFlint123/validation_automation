@@ -6,17 +6,11 @@ If you discover a security vulnerability in `mypackage`, **please do not open
 a public GitHub issue**. Public issues are visible to everyone and may give
 attackers a head start.
 
-Instead, report it privately to the repo's code owners:
+Instead, use GitHub's **Private Vulnerability Reporting** feature:
 
-- **Who:** [`.github/CODEOWNERS`](.github/CODEOWNERS)
-- **How:** Contact a member of the team directly via your usual EY communication
-  channels (email, Teams), or open a GitHub issue with the **bare minimum**
-  required to make contact (e.g. *"Please reach out re: a security finding"*) —
-  no technical detail in the public issue.
+- [Report a vulnerability](https://github.com/BenFlint123/validation_automation/security/advisories/new)
 
-GitHub's *Private Vulnerability Reporting* feature is currently not enabled for
-this repository. Once available, it will become the preferred reporting
-channel and this document will be updated.
+This creates a private draft advisory visible only to maintainers until a fix is coordinated.
 
 ## What to include in a report
 
