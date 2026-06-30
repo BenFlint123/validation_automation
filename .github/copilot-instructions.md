@@ -6,19 +6,14 @@ you edit matching files.
 
 ## Project overview
 
-`mypackage` is a Python library scaffolded from this template.
-
-> **Status:** the library is in early scaffold. `src/mypackage/` is
-> intentionally near-empty — only `__init__.py` (exposing `__version__`) and
-> the `py.typed` marker. The public API has not been designed yet and will
-> land in subsequent PRs.
+`validation_automation` is a Python library intended to automate common model validation tests using a simple orchestration layer. It is intended to implement a small suite of tests and automate them through a config to enable fast model validation.
 
 ## Stable conventions
 
 These are locked in and worth defending:
 
 - **`src/` layout, editable install via `uv`.** Imports are always
-  `from mypackage...`, never `from src.mypackage...`. There is no
+  `from validation_automation...`, never `from src.automation_validation...`. There is no
   `src/__init__.py`; `src/` is the layout root, not a package.
 - **No `sys.path` manipulation** anywhere — `conftest.py`, modules, scripts.
   If imports fail, fix the install (`uv sync`), not the path.
