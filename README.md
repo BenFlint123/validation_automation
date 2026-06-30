@@ -2,7 +2,7 @@
 
 # TODO: This is a placeholder - add proper readme
 
-This is a test commit.
+This is a test commit. This is a second test commit.
 
 ## Contributing
 
