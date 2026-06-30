@@ -71,4 +71,4 @@ jobs:
 
       - name: Bandit
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
-        run: uv run bandit
+        run: uv run bandit -c pyproject.toml -r src/validation_automation
