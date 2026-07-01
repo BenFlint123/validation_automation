@@ -1,5 +1,5 @@
 name: 🐛 Bug report
-description: Report a defect, regression, or unexpected behaviour in mypackage.
+description: Report a defect, regression, or unexpected behaviour in validation_automation.
 title: "fix: <short description of the bug>"
 labels: ["bug", "triage"]
 body:
@@ -18,7 +18,7 @@ body:
     attributes:
       label: Summary
       description: A clear, concise description of the bug.
-      placeholder: Importing `mypackage` raises an unexpected error after `uv sync`.
+      placeholder: Importing `validation_automation` raises an unexpected error after `uv sync`.
     validations:
       required: true
 
@@ -31,7 +31,7 @@ body:
         1. `uv sync --all-groups`
         2. Run the following:
            ```python
-           import mypackage
+           import validation_automation
            ```
         3. Observe ...
       render: markdown
@@ -62,8 +62,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: mypackage version / commit
-      description: Output of `python -c "import mypackage; print(mypackage.__version__)"` or commit SHA.
+      label: validation_automation version / commit
+      description: Output of `python -c "import validation_automation; print(validation_automation.__version__)"` or commit SHA.
       placeholder: 0.1.0 (commit abc1234)
     validations:
       required: true
@@ -96,7 +96,7 @@ body:
     attributes:
       label: Additional environment details
       description: Anything else relevant — `uv --version`, dependency versions, container runtime, etc.
-      placeholder: uv 0.9.26, running inside a corporate VDI.
+      placeholder: uv 0.9.26, running inside a VDI.
 
   - type: checkboxes
     id: checklist
@@ -105,7 +105,7 @@ body:
       options:
         - label: I have searched existing issues and confirmed this is not a duplicate.
           required: true
-        - label: I am running the latest released version (or a recent commit on `master`).
+        - label: I am running the latest released version (or a recent commit on `main`).
           required: true
         - label: This is **not** a security vulnerability (those go through `SECURITY.md`).
           required: true

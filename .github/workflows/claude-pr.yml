@@ -17,7 +17,7 @@ concurrency:
 jobs:
   claude:
     # Only runs when someone (not a bot) comments @claude on a PR (not on plain issues).
-    if: contains(github.event.comment.body, '@claude') && github.event.issue.pull_request != null && github.event.comment.user.type != 'Bot'
+    if: contains(github.event.comment.body, '@claude') && github.event.issue.pull_request != null && github.event.comment.user.type != 'Bot' && github.event.comment.user.login == github.repository_owner
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

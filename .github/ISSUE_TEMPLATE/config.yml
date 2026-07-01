@@ -5,4 +5,4 @@ contact_links:
     about: Do NOT open a public issue. Follow the process in SECURITY.md.
   - name: 💬 Question or discussion
     url: https://github.com/BenFlint123/validation_automation/discussions
-    about: For usage questions or open-ended discussion, use Discussions (if enabled) or contact the code owners team.
+    about: For usage questions or open-ended discussion, use Discussions (if enabled) or contact the code owners.
