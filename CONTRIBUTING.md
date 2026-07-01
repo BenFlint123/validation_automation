@@ -75,9 +75,9 @@ The following branches are protected and cannot be pushed to directly. All chang
 
 | Branch    | Purpose                                              |
 |-----------|------------------------------------------------------|
-| `master`  | Production / released code                           |
+| `main`    | Production / released code                           |
 | `develop` | Integration branch for in-progress work              |
-| `release` | Release candidates being prepared for `master`       |
+| `release` | Release candidates being prepared for `main`       |
 
 ### Required to merge
 
@@ -85,7 +85,7 @@ A PR targeting any protected branch must satisfy **all** of the following before
 
 - ✅ **CI passes** — every required status check from `.github/workflows/ci.yml` is green. Pytest runs on the full matrix (Linux/3.11, Linux/3.12, Windows/3.12); ruff format, ruff lint, mypy and bandit are gated to a single matrix entry (Linux/3.12) since their result is independent of OS and Python version.
 - ✅ **CodeQL scan passes** — no new "error"-severity alerts introduced by the PR. Configured via GitHub's default code-scanning setup.
-- ✅ **Copilot code review** — the automated Copilot review must complete (and any blocking comments resolved).
+- ✅ **Copilot/claude code review** — the automated Copilot review must complete (and any blocking comments resolved).
 - ✅ **At least one Code Owner approval** — see [`.github/CODEOWNERS`](.github/CODEOWNERS).
 - ✅ **Conversations resolved** — all PR review threads marked resolved.
 - ✅ **Branch up to date with target** — rebase or merge the target branch in if it has moved.

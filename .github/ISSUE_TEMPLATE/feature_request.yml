@@ -29,7 +29,7 @@ body:
       label: Proposed solution
       description: A clear description of what you'd like to see added or changed.
       placeholder: |
-        Add a `Widget` class under `src/mypackage/`.
+        Add a `Widget` class under `src/validation_automation/`.
     validations:
       required: true
 
@@ -53,7 +53,7 @@ body:
       description: Sketch how a consumer would use this. Skip if not applicable.
       placeholder: |
         ```python
-        from mypackage import something
+        from validation_automation import something
         result = something(...)
         ```
       render: markdown
